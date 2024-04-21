@@ -41,13 +41,14 @@ const checkExpiry = (pages: any[], daysBefore: number) => {
     if (endDateStr) {
       const endDate = startOfDay(parseISO(endDateStr));
       const diffDays = differenceInCalendarDays(endDate, currentDate);
+      const name = page.properties.Name?.title?.[0]?.plain_text;
       if (diffDays == daysBefore) {
-        const name = page.properties.Name?.title?.[0]?.plain_text;
         const alertMessage = `Alert: ${name} will expire in ${daysBefore} days.`;
         logger.info(alertMessage);
-
-        const topicArn = process.env.AWS_SNS_TOPIC_ARN; // 環境変数からSNSトピックARNを取得
+        const topicArn = process.env.AWS_SNS_TOPIC_ARN;
         await sendNotification(topicArn, alertMessage);
+      } else {
+        logger.info(`${name} has ${diffDays} days remaining`)
       }
     } else {
       logger.error(
