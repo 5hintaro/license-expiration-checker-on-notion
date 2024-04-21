@@ -45,7 +45,7 @@ bun slsdeploy --aws-profile foobar
 
 ### 3. Set environment variables on Github repository
 
-Set the following environment variables in the Github repository secret
+Set the following environment variables in [the Github repository secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository).
 
 - `AWS_REGION` : your region (e.g. `ap-northeast-1`)
 - `AWS_SNS_TOPIC_ARN` : your AWS SNS Topic ARN
@@ -64,9 +64,9 @@ export DATABASE_ID="your_database_id"
 export DAYS_BEFORE_ALERT="10,30"
 
 # run
-bun deploy
+bun run deploy
 ```
 
 ## Github Actions
 
-in preparation...
+The batch runs as per the cron set up in the workflow. Manual execution is also possible.
