@@ -52,6 +52,9 @@ resources:
         TopicArn:
           Ref: SNSTopic
   Outputs:
+    IAMRoleArn:
+      Description: "The ARN of the IAM Role"
+      Value: !GetAtt GitHubAccessRole.Arn
     SNSTopicArn:
       Description: "The ARN of the SNS Topic"
       Value: !Ref SNSTopic
