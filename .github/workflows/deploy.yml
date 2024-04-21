@@ -2,6 +2,7 @@ name: License Expiration Notifier
 
 on:
   workflow_dispatch:
+  # Comment out if you want to stop the schedule.
   schedule:
     - cron: "0 0 * * *"
 
@@ -24,5 +25,13 @@ jobs:
         with:
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
           aws-region: ${{ env.AWS_REGION }}
-      - name: bun run deploy
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: 'latest'
+      - name: Bun Run Deploy
+        # If you need to authenticate with a private registry, you can set the BUN_AUTH_TOKEN environment variable.
+        # https://github.com/oven-sh/setup-bun
+        # env:
+        #   BUN_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: bun run deploy
