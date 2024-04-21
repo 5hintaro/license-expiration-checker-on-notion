@@ -47,7 +47,6 @@ bun slsdeploy --aws-profile foobar
 
 Set the following environment variables in [the Github repository secrets](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-a-repository).
 
-- `AWS_ACCOUNT_ID` : your AWS account ID
 - `AWS_ROLE_ARN`: your AWS role ARN
 - `AWS_REGION` : your region (e.g. `ap-northeast-1`)
 - `AWS_SNS_TOPIC_ARN` : your AWS SNS Topic ARN
