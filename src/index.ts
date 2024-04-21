@@ -35,6 +35,7 @@ const getDaysBeforeAlert = (): number[] => {
 };
 
 const checkExpiry = (pages: any[], daysBefore: number) => {
+  logger.info(`===== Checks if it is ${daysBefore} days before`);
   const currentDate = startOfDay(new Date());
   pages.forEach(async (page) => {
     const endDateStr = page.properties.End?.date?.start;
@@ -48,7 +49,10 @@ const checkExpiry = (pages: any[], daysBefore: number) => {
         const topicArn = process.env.AWS_SNS_TOPIC_ARN;
         await sendNotification(topicArn, alertMessage);
       } else {
-        logger.info(`${name} has ${diffDays} days remaining`)
+        const daysUntilAlert = diffDays - daysBefore;
+        logger.info(
+          `Days remaining until the alert for ${name}: ${daysUntilAlert}`,
+        );
       }
     } else {
       logger.error(

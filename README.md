@@ -66,3 +66,7 @@ export DAYS_BEFORE_ALERT="10,30"
 # run
 bun deploy
 ```
+
+## Github Actions
+
+in preparation...
