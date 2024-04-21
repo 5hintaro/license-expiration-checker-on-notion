@@ -37,9 +37,11 @@ bun slsdeploy --aws-profile foobar
 1. Start by copying [the template](https://cotton-egret-e92.notion.site/464e2c9566af4a8d98c7bdfe6714a582?v=e753707793a14c6f8807da13a0c6c95c&pvs=4) directly into your Notion workspace.
 2. After the template has been successfully copied (database), feel free to personalize it by altering its icon, title, and description to better fit your needs.
 3. For future use, determine the `DATABASE_ID` by locating the specific part of the URL of the copied page (database) that appears like this: https://notion.so/your-account/?v=xxxx.
-4. [Establish a Notion integration](https://developers.notion.com/docs/create-a-notion-integration#step-1-create-an-integration) and make sure to record the "Internal Integration Token" as NOTION_API_SECRET.
+4. [Establish a Notion integration](https://developers.notion.com/docs/create-a-notion-integration#step-1-create-an-integration) and make sure to record the "Internal Integration Token" as `NOTION_TOKEN`.
 5. To connect your application with Notion, [link your database with the integration you created](https://developers.notion.com/docs/create-a-notion-integration#step-2-share-a-database-with-your-integration).
 6. If you wish to have this repository in your own account, simply fork it by clicking on the 'Fork' button located at the upper-right corner of the repository page.
+
+✅ Note the DATABASE_ID and NOTION_TOKEN.
 
 ### 3. Set environment variables on Github repository
 
