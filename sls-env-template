@@ -1,0 +1,7 @@
+AWS_ACCOUNT_ID=123456789012
+GITHUB_USERNAME=your-github-username
+REPOSITORY_NAME=your-repository-name
+AWS_REGION=ap-northeast-1
+
+# You can select other subscriptions and modify them as you wish.
+EMAIL=your_email

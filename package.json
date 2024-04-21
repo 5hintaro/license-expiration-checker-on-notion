@@ -1,0 +1,38 @@
+{
+  "name": "license-expiration-checker-on-notion",
+  "version": "1.0.0",
+  "description": "A tool to check and notify about license expirations using Notion as database",
+  "main": "index.ts",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/5hintaro/license-expiration-checker-on-notion.git"
+  },
+  "author": "5hintaro",
+  "license": "MIT",
+  "scripts": {
+    "envfile": "cp ./sls-env-template ./.env",
+    "slsdeploy": "sls deploy",
+    "testrun": "bun i && bun run src/index.ts",
+    "fmt": "prettier -w ."
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-sns": "^3.556.0",
+    "@notionhq/client": "^2.2.15",
+    "@types/pino": "^7.0.5",
+    "@types/pino-pretty": "^5.0.0",
+    "date-fns": "^3.6.0",
+    "dotenv": "^16.4.5",
+    "prettier": "^3.2.5"
+  },
+  "bugs": {
+    "url": "https://github.com/5hintaro/license-expiration-checker-on-notion/issues"
+  },
+  "homepage": "https://github.com/5hintaro/license-expiration-checker-on-notion#readme"
+}

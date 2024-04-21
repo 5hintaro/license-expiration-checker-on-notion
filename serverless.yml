@@ -1,0 +1,56 @@
+service: license-expiration-checker-on-notion
+useDotenv: true
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'dev'}
+  region: ${env:AWS_REGION}
+
+resources:
+  Resources:
+    MyOIDCProvider:
+      Type: AWS::IAM::OIDCProvider
+      Properties:
+        Url: https://token.actions.githubusercontent.com
+        ClientIdList:
+          - sts.amazonaws.com
+        # You can use a suitable string and it will be automatically retrieved.
+        ThumbprintList:
+          - ffffffffffffffffffffffffffffffffffffffff
+    GitHubAccessRole:
+      Type: AWS::IAM::Role
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Principal:
+                Federated: arn:aws:iam::${env:AWS_ACCOUNT_ID}:oidc-provider/token.actions.githubusercontent.com
+              Action: sts:AssumeRoleWithWebIdentity
+              Condition:
+                StringLike:
+                  token.actions.githubusercontent.com:sub: repo:${env:GITHUB_USERNAME}/${env:REPOSITORY_NAME}:*
+        Policies:
+          - PolicyName: GitHubSNSPublishPolicy
+            PolicyDocument:
+              Version: "2012-10-17"
+              Statement:
+                - Effect: Allow
+                  Action: sns:Publish
+                  Resource: !Ref SNSTopic
+    SNSTopic:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: github-notification-topic
+    # You can select other subscriptions and modify them as you wish.
+    EmailSubscription:
+      Type: AWS::SNS::Subscription
+      Properties:
+        Protocol: email
+        Endpoint: ${env:EMAIL}
+        TopicArn:
+          Ref: SNSTopic
+  Outputs:
+    SNSTopicArn:
+      Description: "The ARN of the SNS Topic"
+      Value: !Ref SNSTopic
